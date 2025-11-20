@@ -152,14 +152,19 @@ resources:
 # The liveness probe used to determine if the container is alive. If the liveness probe fails,
 # the kubelet kills the container, and the container is subjected to its restart policy. If a
 # container does not provide a liveness probe, the default state is Success. These are suggested
-# values.
+# values. Check that there are 2 processes running. If not, then the app is not live.
 livenessProbe:
   enabled: false
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 3
   successThreshold: 1
-  path: "/api/v2.0/poll"
+  probe:
+    exec:
+      command:
+        - /bin/sh
+        - -c
+        - test $(ps | grep '[a]utomation-gateway' | wc -l) -eq 2
 
 # The readiness probe used to determine if the container is ready to accept requests. If the
 # readiness probe fails, the endpoints controller removes the pod’s IP address from the

@@ -293,14 +293,18 @@ tests:
         timeoutSeconds: 10
         failureThreshold: 5
         successThreshold: 1
-        path: "/health"
+        probe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - test $(ps | grep '[a]utomation-gateway' | wc -l) -eq 2
       applicationSettings:
         enabled: true
         env: {}
     asserts:
-      - equal:
-          path: spec.template.spec.containers[0].livenessProbe.httpGet.scheme
-          value: "HTTP"
+      - exists:
+          path: spec.template.spec.containers[0].livenessProbe.exec.command
       - equal:
           path: spec.template.spec.containers[0].livenessProbe.periodSeconds
           value: 20
