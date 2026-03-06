@@ -1,6 +1,7 @@
 # Helm charts for Itential Automation Gateway 4
 
-This repo contains helm charts for running Itential Automation Gateway in Kubernetes.
+This repo contains helm charts for running Itential Automation Gateway in Kubernetes. Requires
+Helm version `v3.15.0`.
 
 ## Itential Automation Gateway (IAG)
 

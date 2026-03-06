@@ -140,14 +140,16 @@ podSecurityContext:
   runAsUser: 1001
   runAsNonRoot: true
 
+# Consult the Itential Validated Designs to understand what the production recommendations are.
+# https://docs.itential.com/docs/highly-available-architecture-server-specs#iag-server
 resourcesEnabled: true
 resources:
   limits:
-    cpu: "1000m"
-    memory: "256Mi"
+    cpu: "16"       # production recommendation
+    memory: "32Gi"  # production recommendation
   requests:
-    cpu: "1000m"
-    memory: "256Mi"
+    cpu: "4"
+    memory: "8Gi"
 
 # The liveness probe used to determine if the container is alive. If the liveness probe fails,
 # the kubelet kills the container, and the container is subjected to its restart policy. If a
